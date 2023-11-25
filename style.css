@@ -10,17 +10,17 @@
 :root {
   /* Core colours */
   /* https://coolors.co/palette/e63946-f1faee-a8dadc-457b9d-1d3557 */
-  --colour-amaranth: #e63946;
-  --colour-peppermint: #f1faee;
-  --colour-aquaisland: #a8dadc;
-  --colour-wedgewood: #457b9d;
-  --colour-cello: #1d3557;
+  --colour-amaranth: #585123;
+  --colour-peppermint: #eec170;
+  --colour-aquaisland: #f2a65a;
+  --colour-wedgewood: #f58549;
+  --colour-cello: #772f1a;
 
   /* Header configuration */
   --header-heading-colour: var(--colour-peppermint);
 
   /* Body configuration */
-  --body-default-colour: var(--colour-cello);
+  --body-default-colour: var(--colour-aquaisland);
   --body-background-colour: var(--colour-peppermint);
 }
 
@@ -31,16 +31,40 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--body-default-colour);
   background-color: var(--body-background-colour);
+  font-family: cursive;
 }
 
 main {
   min-height: 100vh;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+/* Animations ---------------------------------------------------------*/
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+@keyframes transitionOut{
+  from {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+}
 
 /****** Screen reader text utility clsas *******/
 .sr-only {
@@ -53,4 +77,181 @@ main {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Styling the form app------------------------------------------------------ */
+.todo-app{
+  /* width: 100%; */
+  max-width: 540px;
+  background-color:#772f1a;
+  margin: 1rem auto 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+.todo-app h2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.todo-app h2 img {
+  width: 40px;
+  margin-left: 10px;
+}
+
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color:#eec170;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+input{
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.2rem;
+  font-weight: bold;
+
+  background-color: #eec170;
+  color: #772f1a;
+}
+
+input::placeholder {
+  color: #d29354;
+}
+
+.row button{
+  color: #585123;
+  background-color: #ffecca;
+
+  border-style: none;
+  outline: none;
+  padding: 0.4rem 0.4rem;
+  
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+.row button:hover{
+  background-color:#fff5e4;
+  color:#585123;
+  /* border-style: outset; */
+}
+
+h1 {
+  position: relative;
+  color: #585123;
+}
+
+h2 {
+  color: #eec170;
+}
+
+/* Styling the list items -------------------------------------------------------*/
+ul{
+  padding-left: 0.5rem;
+  margin-left: 0rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  /* align-items: center; */
+}
+
+ul li{
+  list-style: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  margin: 0.3rem;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+
+  max-width: 100rem;
+  background-color: rgb(80, 47, 29);
+  border-color: #d6b270;
+  border-radius: 1rem;
+  border-style: dashed;
+
+  animation: transitionIn 0.5s;
+}
+
+/* #list-container li {
+  animation: transitionOut 0.5s;
+} */
+
+ul li::before{
+  content: '';
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+
+  padding-left: 0rem;
+  margin-left: 0rem;
+
+  background-image: url(images/favicon/uncheck-1.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 12px;
+  left: 0.4rem;
+  color:aliceblue;
+}
+
+ul li.checked{
+  text-decoration: line-through;
+  color: #f58549;
+}
+
+ul li.checked::before{
+  background-image: url(images/favicon/check-1.png);
+}
+
+ul li span{
+  position: absolute;
+  top: 0.7rem;
+  bottom: 0.65rem;
+  right: 0.65rem;
+
+  width: 1rem;
+
+  border-radius: 1rem;
+  color: #eec170;
+  line-height: 1rem;
+  text-align: center;
+}
+
+ul li span:hover{
+  background-color: #f58549;
+  color: #0f0d02;
+}
+
+
+/* Styling the todo manager ------------------------------------------------------*/
+.todo-manager {
+  margin-top: 1rem;
+}
+
+.todo-manager button{
+  color: #585123;
+  background-color: #eec170;
+
+  border: none;
+  outline: none;
+  padding: 0.4rem 0.4rem;
+  border-radius: 40px;
+
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.todo-manager button:hover{
+  background-color: #efd4a2;
 }
