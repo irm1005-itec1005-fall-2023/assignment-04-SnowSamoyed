@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="./style.css" />
 
   <!-- Set the Favicon  -->
-  <link rel="icon" href="./images/favicon/rocket.svg" type="image/svg+xml" />
+  <link rel="icon" href="./images/favicon/pooh-favicon.png" type="image/svg+xml" />
 </head>
 <body>
 
@@ -41,13 +41,14 @@
   -->
 
   <main>
-    <h1>This is an todo app</h1>
+    <h1>Pooh is here to help!</h1>
     <div class="todo-app" id="app">
       <h2>To-Do List <img src="images/favicon/pencil.png"></h2>
 
       <div class="row">
-        <input type="text" id="input-box" placeholder="Add Todos here">
-        <button onclick="add_todo()">Add</button>
+        <input type="tex
+        t" id="input-box" placeholder="Add Todos here">
+        <button onclick="add_todo()" id="add-button">Add</button>
       </div>
 
       <ul id="list-container">
@@ -58,6 +59,7 @@
       </div>
     </div>
     <img src="images/pooh.png">
+    <p id="copyright-box">&copy; Winnie the Pooh Todo app</p>
   </main>
 
   <!-- Add JavaScript File -->
