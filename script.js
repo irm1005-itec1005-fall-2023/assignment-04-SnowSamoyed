@@ -55,6 +55,7 @@ function inititialise() {
 }
 
 //
+//Form submit on top to collect user Input ------------------------------------------------------
 //
 inputBox.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
@@ -74,35 +75,27 @@ function add_todo(event){
     let li = document.createElement("li");
     li.innerHTML = inputBox.value;
     li.setAttribute("id", "todo-box");
+    li.className = "unchecked";
     listContainer.appendChild(li);
+
     let this_button = document.createElement("button");
     this_button.innerHTML = "\u00d7";
     li.appendChild(this_button);
-
-    countTodo()
   }
   
   inputBox.value = "";
-  empty_State_Check();
-  saveData();
+  AllChecks();
 }
 
-function countTodo(){
-    const toTalTodo = listContainer.children.length;
-    const checkedTodos = document.querySelectorAll(".checked").length;
-    let todoCount = document.getElementById("todo-count");
-    todoCount.innerHTML = toTalTodo;
-}
 
-countTodo();
-
-//Adding removing function
+//
+//Adding removing function -------------------------------------------------------------
+//
 listContainer.addEventListener("click", removeTodo, false);
 
 function removeTodo(event){
   if (event.target.tagName === "LI"){
     event.target.classList.toggle("checked");
-    saveData();
   }
   // link this with the closing animation????
   else if (event.target.tagName === "BUTTON"){
@@ -111,25 +104,45 @@ function removeTodo(event){
     event.target.parentElement.setAttribute("id", "removing")
     event.target.parentElement.remove();
 
-    countTodo()
-    empty_State_Check();
-    saveData();
+    
   }
+  AllChecks();
 }
 
 
 
-// Add clear everything
+// 
+// Add clear everything -----------------------------------------------------------------------------
+//
 btn_clear.addEventListener("click", clear_all, false);
+
 function clear_all(){
   listContainer.innerHTML = "";
-
-  countTodo();
-  empty_State_Check(); // does not work!
-  saveData();
+  AllChecks();
 }
 
 
+//
+//Count the todos!
+//
+
+function countTodo(){
+  const toTalTodo = listContainer.children.length;
+  const checkedTodos = document.querySelectorAll(".checked").length;
+
+  const todoCount = document.getElementById("todo-count");
+  const doneCount = document.getElementById("done-count")
+
+  todoCount.innerHTML = toTalTodo;
+  doneCount.innerHTML = checkedTodos;
+}
+
+countTodo();
+
+
+//
+//Save and display data
+//
 function saveData(){
   localStorage.setItem("data", listContainer.innerHTML);
 }
@@ -141,21 +154,14 @@ function showSaved(){
 
 showSaved();
 
-//Empty state, also not working???----------------------------------------------------------------
-const insideApp = document.getElementById("main");
 
-// let empty_state = document.createElement("span");
-// empty_state.innerHTML = "Nothing to do? \n Try to hydrate yourself with 'Drink 1 cup of water.'";
-// empty_state.setAttribute("id", "empty-state");
-// insideApp.insertBefore(empty_state, insideApp.childNodes[4]);
-
-// let empty_state_img = document.createElement("img");
-// empty_state_img.src = "/images/pooh-thinking.png";
-// empty_state.appendChild(empty_state_img);
-// console.log(empty_state_img);
-
+//
+// Empty state----------------------------------------------------------------
+//
 const tooggleEmptyState = document.getElementById("empty-state");
 const tooggleTodoList = document.getElementById("list-container");
+const helpTodo = document.getElementById("todo-help");
+const empty_state_img = document.getElementById("empty-state-img");
 
 function empty_State_Check(){
   // empty_state = createEmpty();
@@ -167,6 +173,27 @@ function empty_State_Check(){
     tooggleEmptyState.style.display = "none";
     tooggleTodoList.style.display = "flex";
   }
+
+  randomChoice = Math.floor(Math.random() * 3);;
+  if (randomChoice === 0){
+    helpTodo.innerHTML = "Nothing to do ? Hydrate yourself with 'Drink 1 cup of water'";
+    empty_state_img.setAttribute("src", "images/pooh-eating-honey-live.gif");
+  }
+  else if (randomChoice === 1){
+    helpTodo.innerHTML = "Nothing to do ? Make sure to put 'Love yourself' as first!";
+    empty_state_img.setAttribute("src", "images/pooh-walking-live.gif");
+  }
+  else if (randomChoice === 2){
+    helpTodo.innerHTML = "People say nothing is impossible, but I 'do nothing' every day.";
+    empty_state_img.setAttribute("src", "images/pooh-rest.gif");
+  }
 }
 
+
 empty_State_Check()
+
+function AllChecks(){
+  countTodo();
+  empty_State_Check();
+  saveData();
+}

@@ -29,10 +29,9 @@
 }
 
 /*
-  PAGE / BODY
+  PAGE / BODY -----------------------------------------------------------------
 */
 body {
-  font-family: Arial, Helvetica, sans-serif;
   color: var(--body-default-colour);
   background-color: var(--body-background-colour);
   font-family: cursive;
@@ -60,6 +59,14 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+::selection {
+  background:#585123;
+}
+
+html{
+  overflow:hidden;
 }
 
 /* 
@@ -100,6 +107,10 @@ Animation definitions ---------------------------------------------------------
   to{-webkit-transform:scale(1)}
 }
 
+@keyframes getSomeRest {
+
+}
+
 /****** Screen reader text utility clsas *******/
 .sr-only {
   position: absolute;
@@ -118,11 +129,11 @@ Styling the form app------------------------------------------------------------
 */
 .todo-app{
   /* width: 100%; */
-  max-width: 50rem;
   background-color:#772f1a;
   margin: 1rem auto 1rem;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
+  width: 40rem;
 }
 
 .todo-app h2 {
@@ -194,7 +205,8 @@ Styling the Todo container -----------------------------------------------------
 */
 
 ul{
-  padding-left: 0.5rem;
+  padding-left: 0.2rem;
+  padding-right: 0.4rem;
   margin-left: 0rem;
   
 
@@ -204,21 +216,23 @@ ul{
 
   height: 13.5rem; 
   overflow-y:scroll;
-
 }
 
-/* More to fix */
+/* Todo list scroll bar*/
 ul::-webkit-scrollbar {
   width: 0.2em;
+  
 }
 
 ul::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #f2a65a;
+  -webkit-box-shadow: inset 0 0 6px transparent;
+  border-radius: 10px;
 }
 
 ul::-webkit-scrollbar-thumb {
   background-color: #eec170;
-  /* outline: 0.1px solid #772f1a; */
+  border-radius: 10px;
+  outline: 0.1px solid #772f1a;
 }
 
 
@@ -244,14 +258,10 @@ Styling the todo list items ----------------------------------------------------
   border-style: dashed;
 
   animation: transitionIn 0.5s;
-}
-
-/* trying to line break not working???*/
-#todo-box{
   max-width: 19rem;
   line-break: auto;
-  /* overflow-x: scroll; */
-  /* overflow-clip-margin: 1em; */
+
+  position: relative;
 
   white-space: normal;
   text-overflow: clip; 
@@ -261,12 +271,15 @@ Styling the todo list items ----------------------------------------------------
 #todo-box::-webkit-scrollbar {
   width: none;
   height: 0.2em;
+  
 
   border-radius: 10rem;
 }
  
 #todo-box::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(232, 121, 121, 0.3);
+  position: absolute;
+  left: 0;
 }
  
 #todo-box::-webkit-scrollbar-thumb {
@@ -340,7 +353,7 @@ Styling the todo list items ----------------------------------------------------
 
 
 /* 
-Styling the todo manager ------------------------------------------------------
+Styling the todo manager (The count and clear)------------------------------------------------------
 */
 .todo-manager {
   margin-top: 1rem;
@@ -363,6 +376,10 @@ Styling the todo manager ------------------------------------------------------
   background-color: #efd4a2;
 }
 
+
+/* 
+ Stlying the empty state
+*/
 #empty-state {
   /* padding: 1rem 1rem; */
   margin-left: 2rem;
@@ -381,6 +398,9 @@ Styling the todo manager ------------------------------------------------------
   width: 10rem;
   margin-left: 2rem;
   margin-right: 2rem;
+
+  filter: saturate(900%) contrast(90%) grayscale(30%) sepia(10%) hue-rotate(-15deg); 
+  /* filter: contrast(100%); */
 }
 
 #copyright-box {
@@ -388,6 +408,18 @@ Styling the todo manager ------------------------------------------------------
   margin-bottom: 0.8rem;
 }
 
-html{
-  overflow:hidden;
+
+/* 
+responsive
+*/
+@media (orientation: landscape) {
+  ul{
+    width:38rem;
+  }
+  #todo-box{
+    max-width: 37rem;
+  }
+  #empty-state{
+    margin-left: 12rem;
+  }
 }
