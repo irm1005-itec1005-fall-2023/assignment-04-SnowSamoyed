@@ -9,18 +9,18 @@
 // What to add and fix
 //  1. Responsive
 // 
-//  2. completed with data-
 //✅3.Task count
-//   4. empty state
+//✅4. empty state
 //      Image not displaying
 //      When ClearAll does not work
 //✅5. branding
 //      5.1 Pooh favicon
 //✅6. Copyrights
-//   7.Scroll bar
+//✅ 7.Scroll bar
 
 // Citations
 // 1. Press enter:https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
+
 
 // Constants
 const appID = "app";
