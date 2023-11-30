@@ -40,15 +40,17 @@
 
   -->
 
-  <main>
+  <main id="main">
     <h1>Pooh is here to help!</h1>
     <div class="todo-app" id="app">
       <h2>To-Do List <img src="images/favicon/pencil.png"></h2>
 
-      <div class="row">
-        <input type="tex
-        t" id="input-box" placeholder="Add Todos here">
-        <button onclick="add_todo()" id="add-button">Add</button>
+      <form class="row" action="">
+        <input type="text" id="input-box" placeholder="Add Todos here">
+        <button type="submit" id="add-button">Add</button>
+      </form>
+
+      <div id="empty-state">Nothing to do? Try to hydrate yourself with 'Drink 1 cup of water.'<img src="/images/pooh-thinking.png">
       </div>
 
       <ul id="list-container">
@@ -58,6 +60,9 @@
         <button onclick="clear_all()" id="btn_clear">Clear all</button>
       </div>
     </div>
+
+    
+
     <img src="images/pooh.png">
     <p id="copyright-box">&copy; Winnie the Pooh Todo app</p>
   </main>

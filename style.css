@@ -62,7 +62,10 @@ main {
   align-items: center;
 }
 
-/* Animations ---------------------------------------------------------*/
+/* 
+Animation definitions ---------------------------------------------------------
+*/
+
 @keyframes transitionIn {
   from {
     opacity: 0;
@@ -85,6 +88,18 @@ main {
   }
 }
 
+@keyframes pops_out {
+  from{transform:scale(0)}
+    80%{transform:scale(1.2)}
+    to{transform:scale(1)}
+}
+
+@-webkit-keyframes pops_out {
+  from{-webkit-transform:scale(0)}
+  80%{-webkit-transform:scale(1.2)}
+  to{-webkit-transform:scale(1)}
+}
+
 /****** Screen reader text utility clsas *******/
 .sr-only {
   position: absolute;
@@ -98,7 +113,9 @@ main {
   border-width: 0;
 }
 
-/* Styling the form app------------------------------------------------------ */
+/* 
+Styling the form app---------------------------------------------------------------
+*/
 .todo-app{
   /* width: 100%; */
   max-width: 50rem;
@@ -172,7 +189,10 @@ h2 {
   color: #eec170;
 }
 
-/* Styling the list items -------------------------------------------------------*/
+/* 
+Styling the Todo container ----------------------------------------------------------
+*/
+
 ul{
   padding-left: 0.5rem;
   margin-left: 0rem;
@@ -180,10 +200,9 @@ ul{
 
   display: flex;
   flex-direction: column;
-  justify-content:space-around;
   align-content: start;
 
-  height: 15rem; 
+  height: 13.5rem; 
   overflow-y:scroll;
 
 }
@@ -202,6 +221,12 @@ ul::-webkit-scrollbar-thumb {
   /* outline: 0.1px solid #772f1a; */
 }
 
+
+
+/* 
+Styling the todo list items ----------------------------------------------------------------------------- 
+*/
+
 #todo-box{
   list-style: none;
   font-size: 1rem;
@@ -219,7 +244,6 @@ ul::-webkit-scrollbar-thumb {
   border-style: dashed;
 
   animation: transitionIn 0.5s;
-  
 }
 
 /* trying to line break not working???*/
@@ -250,10 +274,6 @@ ul::-webkit-scrollbar-thumb {
   /* outline: 1px solid slategrey; */
 }
 
-#todo-box span{
-  
-}
-
 
 /* Trying to transition out ???*/
 .removing {
@@ -277,23 +297,26 @@ ul::-webkit-scrollbar-thumb {
   top: 12px;
   left: 0.4rem;
   color:aliceblue;
+  
 }
 
 #todo-box.checked{
   text-decoration: line-through;
   color: #f58549;
+
+  border-color: #9c7d44;
+  animation: pops_out;
 }
 
 #todo-box.checked::before{
   background-image: url(images/favicon/check-1.png);
 }
 
-#todo-box span{
+#todo-box button{
   position: absolute;
-  top: 0.7rem;
-  bottom: 0.65rem;
+  bottom: 0.8rem;
   right: 0.3rem;
-  /* left: 16.65rem; */
+  padding: 0px;
 
   width: 1rem;
   height: 1.2rem;
@@ -301,12 +324,14 @@ ul::-webkit-scrollbar-thumb {
   /* padding-left: 1rem; */
 
   border-radius: 1rem;
+  border-style: none;
   color: #eec170;
+  background-color: transparent;
   line-height: 1rem;
   text-align: center;
 }
 
-#todo-box span:hover{
+#todo-box button:hover{
   
   
   background-color: #f58549;
@@ -314,7 +339,9 @@ ul::-webkit-scrollbar-thumb {
 }
 
 
-/* Styling the todo manager ------------------------------------------------------*/
+/* 
+Styling the todo manager ------------------------------------------------------
+*/
 .todo-manager {
   margin-top: 1rem;
 }
@@ -337,17 +364,23 @@ ul::-webkit-scrollbar-thumb {
 }
 
 #empty-state {
-  max-width: 19rem;
-  line-break: auto;
-  /* overflow-x: scroll; */
-  /* overflow-clip-margin: 1em; */
+  /* padding: 1rem 1rem; */
+  margin-left: 2rem;
+  margin-right: 2rem;
+  max-width: 15rem;
 
+  line-break: auto;
   white-space: normal;
   text-overflow: clip; 
   word-wrap: break-word;
 
   list-style:none;
   color: #d29354;
+}
+#empty-state img{
+  width: 10rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 #copyright-box {

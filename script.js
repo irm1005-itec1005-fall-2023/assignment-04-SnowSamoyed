@@ -19,7 +19,8 @@
 //✅6. Copyrights
 //   7.Scroll bar
 
-// 1. Enter to add
+// Citations
+// 1. Press enter:https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
 
 // Constants
 const appID = "app";
@@ -27,8 +28,6 @@ const headingText = "To do. To done. ✅";
 
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
-let innerTodoList = [];
-let Count = innerTodoList.length;
 
 
 // DOM Elements
@@ -55,30 +54,30 @@ function inititialise() {
   console.log("App successfully initialised");
 }
 
-//https://stackoverflow.com/questions/9643311/pass-a-string-parameter-in-an-onclick-function
-let add_button = document.getElementById("add-button");
-add_button.addEventListener("keypress", function (e) {
+//
+//
+inputBox.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     add_todo();
   }
 });
 
-function add_todo(){
+const formSubmit = document.querySelector(".row");
+formSubmit.addEventListener("submit", add_todo);
+
+function add_todo(event){
+  event.preventDefault();
   if(inputBox.value === ""){
     alert("You must write something");
   }
   else{
     let li = document.createElement("li");
     li.innerHTML = inputBox.value;
-    li.setAttribute("id", "todo-box")
+    li.setAttribute("id", "todo-box");
     listContainer.appendChild(li);
-    let span = document.createElement("span");
-    span.innerHTML = "\u00d7";
-    li.appendChild(span);
-
-    tempTodoValue = inputBox.value;
-    innerTodoList.push(tempTodoValue);
-    console.log(innerTodoList);
+    let this_button = document.createElement("button");
+    this_button.innerHTML = "\u00d7";
+    li.appendChild(this_button);
 
     countTodo()
   }
@@ -89,19 +88,15 @@ function add_todo(){
 }
 
 function countTodo(){
-    // console.log(innerTodoList.length)
-    Count = innerTodoList.length;
+    const toTalTodo = listContainer.children.length;
+    const checkedTodos = document.querySelectorAll(".checked").length;
     let todoCount = document.getElementById("todo-count");
-    todoCount.innerHTML = "0";
-
-    if (Count > 0){
-      todoCount.innerHTML = Count;
-    }
-    else {
-      todoCount.innerHTML = "0";
-    }
+    todoCount.innerHTML = toTalTodo;
 }
 
+countTodo();
+
+//Adding removing function
 listContainer.addEventListener("click", removeTodo, false);
 
 function removeTodo(event){
@@ -110,13 +105,11 @@ function removeTodo(event){
     saveData();
   }
   // link this with the closing animation????
-  else if (event.target.tagName === "SPAN"){
+  else if (event.target.tagName === "BUTTON"){
+    let exitingItems = event.target.parentElement;
+    // exitingItems.style.animation = "transitionOut";
     event.target.parentElement.setAttribute("id", "removing")
     event.target.parentElement.remove();
-
-    tempTodoValue = inputBox.value;
-    innerTodoList.pop(tempTodoValue);
-    console.log(innerTodoList);
 
     countTodo()
     empty_State_Check();
@@ -129,11 +122,9 @@ function removeTodo(event){
 // Add clear everything
 btn_clear.addEventListener("click", clear_all, false);
 function clear_all(){
-  innerTodoList = []
   listContainer.innerHTML = "";
 
   countTodo();
-  console.log(innerTodoList.length, "Empty state check")
   empty_State_Check(); // does not work!
   saveData();
 }
@@ -145,28 +136,37 @@ function saveData(){
 
 function showSaved(){
   listContainer.innerHTML = localStorage.getItem("data");
+  countTodo();
 }
 
 showSaved();
 
 //Empty state, also not working???----------------------------------------------------------------
-console.log(Count);
+const insideApp = document.getElementById("main");
 
-let empty_state = document.createElement("li");
-empty_state.innerHTML = "Nothing to do? \n Try to hydrate yourself with 'Drink 1 cup of water.'";
-listContainer.appendChild(empty_state);
-empty_state.setAttribute("id", "empty-state");
+// let empty_state = document.createElement("span");
+// empty_state.innerHTML = "Nothing to do? \n Try to hydrate yourself with 'Drink 1 cup of water.'";
+// empty_state.setAttribute("id", "empty-state");
+// insideApp.insertBefore(empty_state, insideApp.childNodes[4]);
 
-let empty_state_img = document.createElement("span");
-empty_state_img.src = "/images/pooh-thinking.png";
-empty_state.appendChild(empty_state_img);
-console.log(empty_state_img);
+// let empty_state_img = document.createElement("img");
+// empty_state_img.src = "/images/pooh-thinking.png";
+// empty_state.appendChild(empty_state_img);
+// console.log(empty_state_img);
+
+const tooggleEmptyState = document.getElementById("empty-state");
+const tooggleTodoList = document.getElementById("list-container");
 
 function empty_State_Check(){
-  if (innerTodoList.length === 0){
-    empty_state.style.display = "inline-block";
+  // empty_state = createEmpty();
+  if (listContainer.children.length === 0){
+    tooggleEmptyState.style.display = "inline-block";
+    tooggleTodoList.style.display = "none";
   }
-  else if (innerTodoList.length > 0){
-    empty_state.style.display = "none";
+  else if (listContainer.children.length > 0){
+    tooggleEmptyState.style.display = "none";
+    tooggleTodoList.style.display = "flex";
   }
 }
+
+empty_State_Check()
