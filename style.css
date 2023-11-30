@@ -7,40 +7,114 @@
 /*
  VARIABLES
 */
+/* Citations */
+/* Scroll bars */
+/* https://css-tricks.com/almanac/properties/s/scrollbar/ */
+/* https://codepen.io/akinjide/pen/BpggrZ */
+/* Animations */
+/* https://thoughtbot.com/blog/transitions-and-transforms */
+
 :root {
   /* Core colours */
   /* https://coolors.co/palette/e63946-f1faee-a8dadc-457b9d-1d3557 */
-  --colour-amaranth: #e63946;
-  --colour-peppermint: #f1faee;
-  --colour-aquaisland: #a8dadc;
-  --colour-wedgewood: #457b9d;
-  --colour-cello: #1d3557;
+  --colour-amaranth: #585123;
+  --colour-peppermint: #eec170;
+  --colour-aquaisland: #f2a65a;
+  --colour-wedgewood: #f58549;
+  --colour-cello: #772f1a;
 
   /* Header configuration */
   --header-heading-colour: var(--colour-peppermint);
 
   /* Body configuration */
-  --body-default-colour: var(--colour-cello);
+  --body-default-colour: var(--colour-aquaisland);
   --body-background-colour: var(--colour-peppermint);
 }
 
 /*
-  PAGE / BODY
+  PAGE / BODY -----------------------------------------------------------------
 */
 body {
-  font-family: Arial, Helvetica, sans-serif;
   color: var(--body-default-colour);
   background-color: var(--body-background-colour);
+  font-family: cursive;
+
+  overflow:scroll;
+}
+
+body::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.2rem;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px transparent;
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  /* outline: 0.1px solid #772f1a; */
 }
 
 main {
   min-height: 100vh;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+::selection {
+  background:#585123;
+}
+
+html{
+  overflow:hidden;
+}
+
+/* 
+Animation definitions ---------------------------------------------------------
+*/
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+@keyframes transitionOut{
+  from {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+}
+
+@keyframes pops_out {
+  from{transform:scale(0)}
+    80%{transform:scale(1.2)}
+    to{transform:scale(1)}
+}
+
+@-webkit-keyframes pops_out {
+  from{-webkit-transform:scale(0)}
+  80%{-webkit-transform:scale(1.2)}
+  to{-webkit-transform:scale(1)}
+}
+
+@keyframes getSomeRest {
+
+}
 
 /****** Screen reader text utility clsas *******/
 .sr-only {
@@ -50,7 +124,326 @@ main {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
 }
+
+/* 
+Styling the whole app------------------------------------------------------------------------
+*/
+.todo-app{
+  /* width: 100%; */
+  background-color:#772f1a;
+  margin: 1rem auto 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+.todo-app h2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.todo-app h2 img {
+  width: 40px;
+  margin-left: 10px;
+}
+
+/* 
+Styling the form--------------------------------------------------------------------------------------
+*/
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color:#eec170;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+input{
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.2rem;
+  font-weight: bold;
+
+  background-color: #eec170;
+  color: #772f1a;
+}
+
+input::placeholder {
+  color: #d29354;
+}
+
+/* 
+Form button------------------------------------------------------------------------------------
+*/
+.row button{
+  color: #585123;
+  background-color: #ffecca;
+
+  border-style: none;
+  outline: none;
+  padding: 0.4rem 0.4rem;
+  
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+.row button:hover{
+  background-color:#fff5e4;
+  color:#585123;
+  /* border-style: outset; */
+}
+
+h1 {
+  position: relative;
+  color: #585123;
+}
+
+h2 {
+  color: #eec170;
+}
+
+/* 
+Styling the Todo container ----------------------------------------------------------
+*/
+
+ul{
+  padding-left: 0.2rem;
+  padding-right: 0.4rem;
+  margin-left: 0rem;
+  
+
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+
+  height: 13.5rem; 
+  overflow-y:scroll;
+}
+
+/* Todo list scroll bar*/
+ul::-webkit-scrollbar {
+  width: 0.2em;
+  
+}
+
+ul::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px transparent;
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: #eec170;
+  border-radius: 10px;
+  outline: 0.1px solid #772f1a;
+}
+
+
+
+/* 
+Styling the todo list items ----------------------------------------------------------------------------- 
+*/
+
+#todo-box{
+  list-style: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  margin: 0.3rem;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+
+  max-width: 19rem;
+
+  background-color: rgb(80, 47, 29);
+  border-color: #d6b270;
+  border-radius: 1rem;
+  border-style: dashed;
+
+  animation: transitionIn 0.5s;
+  max-width: 19rem;
+  line-break: auto;
+
+  position: relative;
+
+  white-space: normal;
+  text-overflow: clip; 
+  word-wrap: break-word;
+} 
+
+#todo-box::-webkit-scrollbar {
+  width: none;
+  height: 0.2em;
+  
+
+  border-radius: 10rem;
+}
+ 
+#todo-box::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(232, 121, 121, 0.3);
+  position: absolute;
+  left: 0;
+}
+ 
+#todo-box::-webkit-scrollbar-thumb {
+  background-color: #f2a65a;
+}
+
+#todo-box::before{
+  content: '';
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+
+  padding-left: 0rem;
+  margin-left: 0rem;
+
+  background-image: url(images/favicon/uncheck-1.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 12px;
+  left: 0.4rem;
+  color:aliceblue;
+  
+}
+
+#todo-box.checked{
+  text-decoration: line-through;
+  color: #f58549;
+
+  border-color: #9c7d44;
+  animation: pops_out;
+}
+
+#todo-box.checked::before{
+  background-image: url(images/favicon/check-1.png);
+}
+
+#todo-box button{
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.3rem;
+  padding: 0px;
+
+  width: 1rem;
+  height: 1.2rem;
+
+  border-radius: 1rem;
+  border-style: none;
+  color: #eec170;
+  background-color: transparent;
+  line-height: 1rem;
+  text-align: center;
+}
+
+#todo-box button:hover{
+  
+  
+  background-color: #f58549;
+  color: #0f0d02;
+}
+
+
+/* 
+Styling the todo manager (The count and clear)------------------------------------------------------
+*/
+.todo-manager {
+  margin-top: 1rem;
+}
+
+.todo-manager button{
+  color: #585123;
+  background-color: #eec170;
+
+  border: none;
+  outline: none;
+  padding: 0.4rem 0.4rem;
+  border-radius: 40px;
+
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.todo-manager button:hover{
+  background-color: #efd4a2;
+}
+
+
+/* 
+ Stlying the empty state
+*/
+#empty-state {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  max-width: 15rem;
+
+  line-break: auto;
+  white-space: normal;
+  text-overflow: clip; 
+  word-wrap: break-word;
+
+  list-style:none;
+  color: #d29354;
+}
+#empty-state img{
+  width: 10rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+
+  filter: saturate(900%) contrast(90%) grayscale(30%) sepia(10%) hue-rotate(-15deg); 
+}
+
+#copyright-box {
+  color: #d29354;
+  margin-bottom: 0.8rem;
+}
+
+
+/* 
+responsive
+*/
+
+.todo-app{
+  width: 40rem;
+}
+ul{
+  width:38rem;
+}
+#todo-box{
+  max-width: 37rem;
+}
+#empty-state{
+  margin-left: 12rem;
+}
+
+@media screen and (max-width: 576px) {
+  main{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .todo-app{
+    width: 20rem;
+  }
+  ul{
+    width: 18rem;
+  }
+  #todo-box{
+    max-width: 18rem;
+  }
+  #empty-state{
+    margin-left: 2rem;
+  }
+}
+
+
+  
