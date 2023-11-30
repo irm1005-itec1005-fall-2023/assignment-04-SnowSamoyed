@@ -175,9 +175,11 @@ function empty_State_Check(){
   }
 
   randomChoice = Math.floor(Math.random() * 3);;
+  randomChoice = 0;
   if (randomChoice === 0){
     helpTodo.innerHTML = "Nothing to do ? Hydrate yourself with 'Drink 1 cup of water'";
     empty_state_img.setAttribute("src", "images/pooh-eating-honey-live.gif");
+    empty_state_img.setAttribute("id", "pooh-eating")
   }
   else if (randomChoice === 1){
     helpTodo.innerHTML = "Nothing to do ? Make sure to put 'Love yourself' as first!";

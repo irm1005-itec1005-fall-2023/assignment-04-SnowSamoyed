@@ -44,11 +44,11 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #f2a65a;
+  -webkit-box-shadow: inset 0 0 6px transparent;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #eec170;
+  background-color: transparent;
   /* outline: 0.1px solid #772f1a; */
 }
 
@@ -125,7 +125,7 @@ Animation definitions ---------------------------------------------------------
 }
 
 /* 
-Styling the form app---------------------------------------------------------------
+Styling the whole app---------------------------------------------------------------
 */
 .todo-app{
   /* width: 100%; */
@@ -133,7 +133,6 @@ Styling the form app------------------------------------------------------------
   margin: 1rem auto 1rem;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
-  width: 40rem;
 }
 
 .todo-app h2 {
@@ -147,6 +146,9 @@ Styling the form app------------------------------------------------------------
   margin-left: 10px;
 }
 
+/* 
+Styling the form
+*/
 .row{
   display: flex;
   align-items: center;
@@ -283,7 +285,7 @@ Styling the todo list items ----------------------------------------------------
 }
  
 #todo-box::-webkit-scrollbar-thumb {
-  background-color: #eec170;
+  background-color: #f2a65a;
   /* outline: 1px solid slategrey; */
 }
 
@@ -412,14 +414,34 @@ Styling the todo manager (The count and clear)----------------------------------
 /* 
 responsive
 */
-@media all and (max-width: 1024px) and (max-height: 768px) and (orientation:landscape) {
+
+.todo-app{
+  width: 40rem;
+}
+ul{
+  width:38rem;
+}
+#todo-box{
+  max-width: 37rem;
+}
+#empty-state{
+  margin-left: 12rem;
+}
+
+@media screen and (max-width: 576px) {
+  .todo-app{
+    width: 20rem;
+  }
   ul{
-    width:38rem;
+    width: 18rem;
   }
   #todo-box{
-    max-width: 37rem;
+    max-width: 18rem;
   }
   #empty-state{
-    margin-left: 12rem;
+    margin-left: 2rem;
   }
 }
+
+
+  
