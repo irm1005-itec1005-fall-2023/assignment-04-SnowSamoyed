@@ -4,25 +4,12 @@
  *
  */
 
-
-//
-// What to add and fix
-//  1. Responsive
-// 
-//✅3.Task count
-//✅4. empty state
-//      Image not displaying
-//      When ClearAll does not work
-//✅5. branding
-//      5.1 Pooh favicon
-//✅6. Copyrights
-//✅ 7.Scroll bar
-
 // Citations
-// 1. Press enter:https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
+// Basic todo structue in html and javascript:https://www.youtube.com/watch?v=G0jO8kUrg-I&t=1364s
+// Press enter:https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
 
 
-// Constants
+// Global Constants
 const appID = "app";
 const headingText = "To do. To done. ✅";
 
@@ -62,8 +49,12 @@ inputBox.addEventListener("keypress", function (e) {
     add_todo();
   }
 });
-
 const formSubmit = document.querySelector(".row");
+
+//
+//Adding function -----------------------------------------------------------------------------------
+//
+
 formSubmit.addEventListener("submit", add_todo);
 
 function add_todo(event){
@@ -89,7 +80,7 @@ function add_todo(event){
 
 
 //
-//Adding removing function -------------------------------------------------------------
+//Adding removing function ---------------------------------------------------------------------
 //
 listContainer.addEventListener("click", removeTodo, false);
 
@@ -101,14 +92,12 @@ function removeTodo(event){
   else if (event.target.tagName === "BUTTON"){
     let exitingItems = event.target.parentElement;
     // exitingItems.style.animation = "transitionOut";
-    event.target.parentElement.setAttribute("id", "removing")
     event.target.parentElement.remove();
 
     
   }
   AllChecks();
 }
-
 
 
 // 
@@ -156,7 +145,7 @@ showSaved();
 
 
 //
-// Empty state----------------------------------------------------------------
+// Empty state--------------------------------------------------------------------------------------
 //
 const tooggleEmptyState = document.getElementById("empty-state");
 const tooggleTodoList = document.getElementById("list-container");
@@ -173,9 +162,14 @@ function empty_State_Check(){
     tooggleEmptyState.style.display = "none";
     tooggleTodoList.style.display = "flex";
   }
+}
+empty_State_Check()
 
+//
+//random the empty state------------------------------------------------------------------------------
+//
+function randomEmpty(){
   randomChoice = Math.floor(Math.random() * 3);;
-  randomChoice = 0;
   if (randomChoice === 0){
     helpTodo.innerHTML = "Nothing to do ? Hydrate yourself with 'Drink 1 cup of water'";
     empty_state_img.setAttribute("src", "images/pooh-eating-honey-live.gif");
@@ -191,11 +185,12 @@ function empty_State_Check(){
   }
 }
 
-
-empty_State_Check()
-
+//
+//Function collection--------------------------------------------------------------------------
+//
 function AllChecks(){
   countTodo();
   empty_State_Check();
+  randomEmpty();
   saveData();
 }

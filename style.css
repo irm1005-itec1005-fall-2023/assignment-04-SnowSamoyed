@@ -8,8 +8,11 @@
  VARIABLES
 */
 /* Citations */
+/* Scroll bars */
 /* https://css-tricks.com/almanac/properties/s/scrollbar/ */
 /* https://codepen.io/akinjide/pen/BpggrZ */
+/* Animations */
+/* https://thoughtbot.com/blog/transitions-and-transforms */
 
 :root {
   /* Core colours */
@@ -36,15 +39,17 @@ body {
   background-color: var(--body-background-colour);
   font-family: cursive;
 
-  overflow-y:scroll;
+  overflow:scroll;
 }
 
 body::-webkit-scrollbar {
   width: 0.2em;
+  height: 0.2rem;
 }
 
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px transparent;
+  background-color: transparent;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -125,7 +130,7 @@ Animation definitions ---------------------------------------------------------
 }
 
 /* 
-Styling the whole app---------------------------------------------------------------
+Styling the whole app------------------------------------------------------------------------
 */
 .todo-app{
   /* width: 100%; */
@@ -147,7 +152,7 @@ Styling the whole app-----------------------------------------------------------
 }
 
 /* 
-Styling the form
+Styling the form--------------------------------------------------------------------------------------
 */
 .row{
   display: flex;
@@ -175,6 +180,9 @@ input::placeholder {
   color: #d29354;
 }
 
+/* 
+Form button------------------------------------------------------------------------------------
+*/
 .row button{
   color: #585123;
   background-color: #ffecca;
@@ -286,13 +294,6 @@ Styling the todo list items ----------------------------------------------------
  
 #todo-box::-webkit-scrollbar-thumb {
   background-color: #f2a65a;
-  /* outline: 1px solid slategrey; */
-}
-
-
-/* Trying to transition out ???*/
-.removing {
-  animation: transitionOut 0.5s;
 }
 
 #todo-box::before{
@@ -335,8 +336,6 @@ Styling the todo list items ----------------------------------------------------
 
   width: 1rem;
   height: 1.2rem;
-  /* margin-left: 1rem; */
-  /* padding-left: 1rem; */
 
   border-radius: 1rem;
   border-style: none;
@@ -383,7 +382,6 @@ Styling the todo manager (The count and clear)----------------------------------
  Stlying the empty state
 */
 #empty-state {
-  /* padding: 1rem 1rem; */
   margin-left: 2rem;
   margin-right: 2rem;
   max-width: 15rem;
@@ -402,7 +400,6 @@ Styling the todo manager (The count and clear)----------------------------------
   margin-right: 2rem;
 
   filter: saturate(900%) contrast(90%) grayscale(30%) sepia(10%) hue-rotate(-15deg); 
-  /* filter: contrast(100%); */
 }
 
 #copyright-box {
@@ -429,6 +426,11 @@ ul{
 }
 
 @media screen and (max-width: 576px) {
+  main{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   .todo-app{
     width: 20rem;
   }
